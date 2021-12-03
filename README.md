@@ -1,7 +1,7 @@
 # Zendesk Coding Challenge
 
-My entry for the Zendesk Coding Challenge
-Name: Endreas Yohannes
+* My entry for the Zendesk Coding Challenge
+* Name: Endreas Yohannes
 
 ### Introduction:
 * This is a CLI-based ticket viewer to view Zendesk tickets from an Agent perspective
