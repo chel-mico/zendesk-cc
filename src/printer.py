@@ -23,7 +23,6 @@ class Printer:
         """Function to get the next page of tickets"""
         if not meta['has_more']:
             return "", None
-        print(meta['after_cursor'])
         response = self.request("https://{}.zendesk.com/api/v2/tickets.json?page[size]={}&page[after]={}".format(self.domain, self.max, meta['after_cursor']))
         if response.status_code != 200:
             self.login.error_check(response.status_code)
@@ -46,7 +45,6 @@ class Printer:
         """Function to print a single ticket"""
         response = self.request("https://{}.zendesk.com/api/v2/tickets/{}".format(self.domain, ticket_id))
         if response.status_code != 200:
-            print(response.status_code)
             self.login.error_check(response.status_code)
             return response
         ticket = response.json()['ticket']

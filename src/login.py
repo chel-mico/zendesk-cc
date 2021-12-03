@@ -51,6 +51,8 @@ class Login:
 
     def error_check(self, code) -> None:
         """Function to check a bad response code and print an accurate explanation."""
+        if code == 400:
+            print("403 Bad Request\nThere's an issue with your request :(, please try again.")
         if code == 403:
             print("403 Forbidden\nSorry, but you don't have the right permissions to do this :(")
         elif code == 404:
