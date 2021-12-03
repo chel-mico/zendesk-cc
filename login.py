@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 
 class Login:
-
+    """Constructor for a Login class to help with authentication"""
     def __init__(self):
         load_dotenv()
         self.ID = os.getenv("ID")
@@ -13,8 +13,8 @@ class Login:
         self.url = "https://{}.zendesk.com/oauth/authorizations/new?response_type=code&redirect_uri={}&client_id={}&scope=read%20write".format(self.domain, self.redirect, self.ID)
         self.token = self.auth()
 
-    
-    def auth(self):
+    def auth(self) -> str:
+        """Function to authenticate a user with OAuth"""
         auth = False
         print("Welcome to the Ticket Viewer!\n")
         print("Before we begin, please log in here: {}".format(self.url))
@@ -22,12 +22,14 @@ class Login:
         print("Simply input the URL that's in your search bar below.\n")
         while not auth:
             try:
+                #getting the auth code
                 response = input("URL (or q to leave): ")
                 if response == "q":
                     return response
                 if "code" not in response:
                     print("You may have done the authentication wrong, please try again.\n")
                     continue
+                #fetching the token
                 auth_code = response.split('=')[1]
                 parameters = {
                     "grant_type": "authorization_code",
@@ -47,7 +49,8 @@ class Login:
                 continue
         return res.json()['access_token']
 
-    def error_check(code):
+    def error_check(self, code) -> None:
+        """Function to check a bad response code and print an accurate explanation."""
         if code == 403:
             print("403 Forbidden\nSorry, but you don't have the right permissions to do this :(")
         elif code == 404:
