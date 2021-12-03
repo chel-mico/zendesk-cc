@@ -1,7 +1,6 @@
 from login import Login
 from printer import Printer
 import unittest
-import math
 import requests
 import json
 
@@ -39,25 +38,25 @@ class TestPrinting(unittest.TestCase):
     #next tests
     def test_next_print(self):
         meta, response = self.printer.first()
-        meta, response = self.printer.next(response.json()['meta'], 2)
+        meta, response = self.printer.next(response.json()['meta'], 50)
         self.assertEqual(response.status_code, 200)
         self.assertFalse(meta == "")
 
     def test_next_print_error(self):
         meta, response = self.printer.first()
-        count = math.ceil(self.printer.count().json()['count']['value']/self.max)
-        page = 2
+        count = self.printer.count().json()['count']['value']
+        page = 25
         while page < count:
             meta, response = self.printer.next(response.json()['meta'], page)
-            page += 1
+            page += 25
         # no next page = no response
         self.assertTrue(response is None)
 
     #prev tests
     def test_prev_print(self):
         meta, response = self.printer.first()
-        meta, response = self.printer.next(response.json()['meta'], 2)
-        meta, response = self.printer.prev(response.json()['meta'], 1)
+        meta, response = self.printer.next(response.json()['meta'], 50)
+        meta, response = self.printer.prev(response.json()['meta'], 25)
         self.assertEqual(response.status_code, 200)
         self.assertFalse(meta == "")
 
