@@ -1,16 +1,16 @@
 # Zendesk Coding Challenge
 
-My entry for the Zendesk Coding Challenge
-Name: Endreas Yohannes
+* My entry for the Zendesk Coding Challenge
+* Name: Endreas Yohannes
 
-### Introduction:
+### Introduction
 * This is a CLI-based ticket viewer to view Zendesk tickets from an Agent perspective
 
 ### Dependencies
 * [requests](https://docs.python-requests.org/en/latest/)
 * [python-dotenv](https://pypi.org/project/python-dotenv/)
 
-### Installation (for contributors)
+### Installation
 
 1. Clone the repo.
    ```sh
@@ -18,7 +18,7 @@ Name: Endreas Yohannes
    ```
 2. Install the dependencies.
    ```sh
-   pip install reqs.txt
+   pip install -r reqs.txt
    ```
 3. Create a new .env file with the following entries.
    ```sh
