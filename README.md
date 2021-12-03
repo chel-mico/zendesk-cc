@@ -18,7 +18,7 @@
    ```
 2. Install the dependencies.
    ```sh
-   pip install reqs.txt
+   pip install -r reqs.txt
    ```
 3. Create a new .env file with the following entries.
    ```sh
