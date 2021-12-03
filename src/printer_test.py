@@ -16,7 +16,18 @@ class TestPrinting(unittest.TestCase):
         self.printer = Printer(self.login)
         do_post = input("You will need more than 25 pages to perform multi-page tests. Do you need to post some test tickets? (y/n)")
         if do_post == 'y':
-            self.post_test()
+            with open('tickets.json') as f:
+                data = json.load(f)
+            headers = {
+                "Authorization": "Bearer {}".format(self.printer.token),
+                "Content-Type": "application/json"
+            }
+            response = requests.post(
+                "https://{}.zendesk.com/api/v2/tickets/create_many.json".format(self.login.domain), 
+                headers=headers,
+                json=data
+            )
+            print("Response code: {}".format(response.status_code))
             do_post = input("Wait until the test show up in your account (1-2 minutes) and then enter any character")
 
     #first print test
@@ -82,21 +93,6 @@ class TestPrinting(unittest.TestCase):
     def test_request(self):
         response = self.printer.request("https://{}.zendesk.com/api/v2/tickets/count.json".format(self.printer.domain))
         self.assertEqual(response.status_code, 200)
-
-    def post_test(self) -> None:
-        """Function to add a set of test tickets for testing purposes"""
-        with open('tickets.json') as f:
-            data = json.load(f)
-        headers = {
-            "Authorization": "Bearer {}".format(self.printer.token),
-            "Content-Type": "application/json"
-        }
-        response = requests.post(
-            "https://{}.zendesk.com/api/v2/tickets/create_many.json".format(self.login.domain), 
-            headers=headers,
-            json=data
-        )
-        print("Response code: {}".format(response.status_code))
 
 if __name__ == "__main__":
     unittest.main()
