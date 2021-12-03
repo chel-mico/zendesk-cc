@@ -10,7 +10,7 @@
 * [requests](https://docs.python-requests.org/en/latest/)
 * [python-dotenv](https://pypi.org/project/python-dotenv/)
 
-### Installation (for contributors)
+### Installation
 
 1. Clone the repo.
    ```sh
